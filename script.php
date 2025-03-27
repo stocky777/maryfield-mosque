@@ -5,15 +5,33 @@ class PrayerTimetable {
     private $response;
     //data of the api from the response will be stored here
     private $data;
-    private $api_url;
+    //pasing the url of the json data here directly
+    private $api_url = "https://api.aladhan.com/v1/calendar/2025/3?latitude=56.47404281844331&longitude=-2.963501315403592&method=3&shafaq=general&tune=5%2C3%2C5%2C7%2C9%2C-1%2C0%2C8%2C-6&timezonestring=UTC&calendarMethod=UAQ";
     //construct class when called will automatically call the api aswell and therefore decode it
-    public function __construct(string $json)
+    public function __construct()
     {
-        $this->response = file_get_contents($json);
+        //check response of the content
+        #$this->response = file_get_contents($this->api_url);
+        //checks if there's anything wrong with the json data before displaying
+        $this->response = $this->checkIntegrityOfData();
+        //decodes the json data
         $this->data = json_decode($this->response);
-        $this->api_url = $json;
     }
 
+    //checking if the data is working properly if not it will send a message instead
+    public function checkIntegrityOfData()
+    {
+        $txt = file_get_contents($this->api_url);
+        if($txt == FALSE)
+        {
+            echo "<h1>something is wrong please retry again later</h1> <br>";
+            echo "<h1>ERROR 100 - No data or content available</h1>";
+        } else {
+            return $txt;
+        }
+    }
+
+    //nearly done need to change a few things for it
     public function checkdateandchange(){
         echo $this->api_url;
         echo '<br>--------------------------------------------- </br>';
@@ -22,8 +40,6 @@ class PrayerTimetable {
         $thisyear = date('Y');
         echo $thismonth, $thisyear;
         echo '<br>--------------------------------------------- </br>';
-        $TMUrl = preg_replace("/\/\d{4}\/\d{1}\//","$thisyear/$thismonth/",$this->api_url);
-        echo $TMUrl;
     }
 
     //function doesnt't store the data due to database memory not being enough
@@ -60,8 +76,8 @@ class PrayerTimetable {
 //original url in case it doesn't work anymore
 #$api_url = "https://api.aladhan.com/v1/calendar/2025/3?latitude=56.47404281844331&longitude=-2.963501315403592&method=3&shafaq=general&tune=5%2C3%2C5%2C7%2C9%2C-1%2C0%2C8%2C-6&timezonestring=UTC&calendarMethod=UAQ";
 
-$api_url = "https://api.aladhan.com/v1/calendar/2025/3?latitude=56.47404281844331&longitude=-2.963501315403592&method=3&shafaq=general&tune=5%2C3%2C5%2C7%2C9%2C-1%2C0%2C8%2C-6&timezonestring=UTC&calendarMethod=UAQ";
-$timetable = new PrayerTimeTable($api_url);
+//$api_url = "https://api.aladhan.com/v1/calendar/2025/3?latitude=56.47404281844331&longitude=-2.963501315403592&method=3&shafaq=general&tune=5%2C3%2C5%2C7%2C9%2C-1%2C0%2C8%2C-6&timezonestring=UTC&calendarMethod=UAQ";
+$timetable = new PrayerTimeTable();
 $test = $timetable->checkdateandchange();
 //$ttbl = $timetable->getTimetable();
 
