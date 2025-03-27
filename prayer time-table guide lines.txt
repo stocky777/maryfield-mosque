@@ -1,0 +1,27 @@
+prayer time-table guide lines
+
+The scholars have agreed to follow astronomical data to determine the beginning of the prayer timings in most of the "muslim countries as follow" -> which
+could indicate is different from the equator and given the fact that Dundee is in Scotland and summer and winter there are big changes in time of sunrise and sunset
+this could may not apply, may require a hujur to determine how to they calculate these.
+
+
+
+timeanddate basic api;
+astronomy api pricing is $99
+
+with 50,000 credits for 5 locations, 
+if the credits are for each call which means 365 days * 5 calls = 1825 calls 
+
+
+astronomical measures;
+there are two sun dial and clock in order to develop computing prayer times, the equation of time is the difference between time and sundial clock
+
+
+
+source:
+https://islamiccentreedgware.org/monthly-prayer-time/how-prayer-times-are-determined/ -- article regarding the studies
+https://www.timeanddate.com/astronomy/uk/dundee -- in depth of light in Dundee
+
+
+for localhost:
+
