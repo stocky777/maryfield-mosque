@@ -76,6 +76,20 @@ class PrayerTimetable {
         //return $timingList; no return required when this instantiate
     }
 
+        //comparison of dates, will return false or true
+    public function datecomp($_data): bool
+    {
+        $tmp = date("d-m-Y", strtotime($_data));
+        $todaydate = date("d-m-Y");
+        if($todaydate !== $tmp)
+        {
+            return TRUE;
+        } else { 
+            return FALSE; 
+        }
+    }
+
+
     //generates the whole timetable, checks if today's date is same as one of the rows and if so it will highlight
     //removes certain columns that are not required
     public function generateTimetableMonth()
@@ -100,9 +114,9 @@ class PrayerTimetable {
             $base = $day->date->gregorian;
             $date = $base->date;
             $weekday = $base->weekday->en;
-            $tmp = date("d-m-Y", strtotime($date));
             #echo $tmp;
-            if($todaydate !== $tmp){
+                       
+            if($this->datecomp($date)){
                 echo "<tr scope='row'>";
             } else 
             {
@@ -119,6 +133,8 @@ class PrayerTimetable {
         echo "</table>";
 
     }
+
+
 }
 
 //original url in case it doesn't work anymore
