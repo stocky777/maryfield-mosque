@@ -2,6 +2,8 @@ version: '3' # docker version
 services:
   www:
     image: php:apache
+    environment: #changed to the correct file
+      - APACHE_DOCUMENT_ROOT=/var/www/html/index.php
     volumes:
       - "./:/var/www/html" # sync project with dir with container web dir
     ports:

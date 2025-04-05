@@ -5,10 +5,9 @@ class PrayerTimetable {
     private $response;
     //data of the api from the response will be stored here
     private $data;
-    //pasing the url of the json data here directly
+    //pasing the url of the json data here directly, due to the fact that the api is free and unlimited
     private $api_url = "https://api.aladhan.com/v1/calendar/{year}/{month}?latitude=56.47404281844331&longitude=-2.963501315403592&method=3&shafaq=general&tune=5%2C3%2C5%2C7%2C9%2C-1%2C0%2C8%2C-6&timezonestring=UTC&calendarMethod=UAQ";
     //construct class when called will automatically call the api aswell and therefore decode it
-    
     public function __construct()
     {
         //check response of the content
@@ -89,11 +88,11 @@ class PrayerTimetable {
         $prayer_titles = array_keys((array) $first_day->timings);
         $prayer_titles = array_filter($prayer_titles, function($title)
         {
-            return !in_array($title, ["Firstthird","Midnight","Lastthird","Sunrise"]);
+            return !in_array($title, ["Firstthird","Midnight","Lastthird","Sunrise","Sunset"]);
         });
         
         foreach($prayer_titles as $title){
-            echo "<th>$title</th>";
+            echo "<th scope='col'>$title</th>";
         }
         echo "</tr></thead>";
         foreach ($this->data->data as $day)
@@ -104,10 +103,10 @@ class PrayerTimetable {
             $tmp = date("d-m-Y", strtotime($date));
             #echo $tmp;
             if($todaydate !== $tmp){
-                echo "<tr>";
+                echo "<tr scope='row'>";
             } else 
             {
-                echo '<tr class="table-dark">';
+                echo '<tr scope="row" class="table-dark">';
             }
             echo "<td>$date</td><td>$weekday</td>";
             foreach ($prayer_titles as $title)
@@ -120,10 +119,6 @@ class PrayerTimetable {
         echo "</table>";
 
     }
-
-
-
-
 }
 
 //original url in case it doesn't work anymore
