@@ -119,6 +119,20 @@ class PrayerTimetable {
         echo "</table>";
 
     }
+
+    //multiple functions uses the same function so better to have it one place
+    //what it does is basically returns boolean if the date is the same
+    public function datecomp($_data): bool
+    {
+        $tmp = date("d-m-Y", strtotime($date));
+        $todaydate = date("d-m-Y");
+        if($todaydate == $tmp)
+        {
+            return TRUE;
+        } else { 
+            return FALSE; 
+        }
+    }
 }
 
 //original url in case it doesn't work anymore
