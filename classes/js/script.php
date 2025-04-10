@@ -49,32 +49,32 @@ class PrayerTimetable {
     }
 
     //function doesnt't store the data due to database memory not being enough
-    public function getTimetable()
-    {
-        $timingList = [];
-        foreach ($this->data->data as $day)
-        {
-            $base = $day->date->gregorian;
-            $date = $base->date;
-            $weekday = $base->weekday->en;
-            echo $date;
-            echo $weekday;
-            //day contains all the prayer times
-            //the foreach loop will loop until the end of the month, diplsaying namaz name and time
-            foreach($day->timings as $title => $time)
-            {
-                //condition of removing 2 type of data
-                if($title !== "Firstthird" && $title !== "Lastthird"){
-                //may need to clear out firstthird. lastthird
-                echo $title;
+    // public function getTimetable()
+    // {
+    //     $timingList = [];
+    //     foreach ($this->data->data as $day)
+    //     {
+    //         $base = $day->date->gregorian;
+    //         $date = $base->date;
+    //         $weekday = $base->weekday->en;
+    //         echo $date;
+    //         echo $weekday;
+    //         //day contains all the prayer times
+    //         //the foreach loop will loop until the end of the month, diplsaying namaz name and time
+    //         foreach($day->timings as $title => $time)
+    //         {
+    //             //condition of removing 2 type of data
+    //             if($title !== "Firstthird" && $title !== "Lastthird"){
+    //             //may need to clear out firstthird. lastthird
+    //             echo $title;
                 
-                echo str_replace(" (UTC)"," ",$time);
-                //echo $timingList;
-                }
-            }
-        }
-        //return $timingList; no return required when this instantiate
-    }
+    //             echo str_replace(" (UTC)"," ",$time);
+    //             //echo $timingList;
+    //             }
+    //         }
+    //     }
+    //     //return $timingList; no return required when this instantiate
+    // }
 
     //comparison of dates, will return false or true
     public function datecomp($_data): bool
@@ -88,6 +88,7 @@ class PrayerTimetable {
             return FALSE; 
         }
     }
+
 
     //generates the whole timetable, checks if today's date is same as one of the rows and if so it will highlight
     //removes certain columns that are not required
@@ -133,21 +134,65 @@ class PrayerTimetable {
         echo "</table>";
     }
 
+    #data can be fed here so it can take the 
     public function dynamicTimetable()
     {
-        echo "<table border='1', class='table table-striped'>";
-        echo "<thead>";
-        echo "<tr><th scope='col'>Date</th><th scope='col'>prayer</th>";
+        echo '
+        <div class="timetable-overlap">
+        <div class="container">
+        <div class="row justify-content-center">
+        <div class="col-md-8">
+        <div class="timetable-box bg-light p-4 shadow text-center">
+        <h4 class="mb-3">Prayer Timetable</h4>
+        <div class="table-responsive">
+        <table class="table table-bordered">
+        <thead>
+        <tr>
+        <th>Prayer</th>
+        <th>Start</th>
+        <th>Jamat</th>
+        </tr>
+        </thead>
+        </tbody>';
         $first_day = reset($this->data->data);
         $prayer_titles = array_keys((array) $first_day->timings);
+        #this might be put as another function instead
         $prayer_titles = array_filter($prayer_titles, function($title)
         {
             return !in_array($title, ["Firstthird","Midnight","Lastthird","Sunrise","Sunset"]);
         });
-        echo "</tr></thead>";
-        foreach($prayer_titles as $title){
-            echo "<tr scope='col'>$title</tr>";
+        //comparison of days and if true then show only the prayers of that day
+        foreach ($this->data->data as $base){
+            
+            $_base = $base->date->gregorian;
+            $date = $_base->date;
+            if(!$this->datecomp($date)){
+                echo $date;
+                foreach($prayer_titles as $title)
+                {
+                    echo $title;
+                    $time = str_replace( " (UTC)", "",$base->timings->$title);
+                    echo $time;
+                }
+                
+            }
         }
+        //$prayer_titles = array_unique((array) $get_data->timings);
+        #$prayer_titles = array_filter($prayer_titles, function($title)
+        #{
+        #    return !in_array($title, ["Firstthird","Midnight","Lastthird","Sunrise","Sunset"]);
+        #});
+        #foreach($prayer_titles as $title => $name)
+        #{
+        #    echo $title;
+        #    echo $name;
+        #}
+
+
+
+
+
+        echo '</div>';
     }
 
 
