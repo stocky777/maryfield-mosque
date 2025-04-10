@@ -86,7 +86,11 @@
     </div>
   </div>
 </div>
-
+<?php 
+  include_once("js/script.php");
+  $t = new PrayerTimeTable();
+  $ttbl = $t->dynamicTimetable();
+?>
 <!-- Main Content -->
 
 <!-- New Bigger Div -->

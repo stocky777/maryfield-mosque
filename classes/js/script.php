@@ -76,7 +76,7 @@ class PrayerTimetable {
         //return $timingList; no return required when this instantiate
     }
 
-        //comparison of dates, will return false or true
+    //comparison of dates, will return false or true
     public function datecomp($_data): bool
     {
         $tmp = date("d-m-Y", strtotime($_data));
@@ -89,17 +89,17 @@ class PrayerTimetable {
         }
     }
 
-
     //generates the whole timetable, checks if today's date is same as one of the rows and if so it will highlight
     //removes certain columns that are not required
     public function generateTimetableMonth()
     {
-        $todaydate = date("d-m-Y");
+        //$todaydate = date("d-m-Y");
         echo "<table border='1', class='table table-striped'>";
         echo "<thead>";
         echo "<tr><th scope='col'>Date</th><th scope='col'>Weekday</th>";
         $first_day = reset($this->data->data);
         $prayer_titles = array_keys((array) $first_day->timings);
+        #this might be put as another function instead
         $prayer_titles = array_filter($prayer_titles, function($title)
         {
             return !in_array($title, ["Firstthird","Midnight","Lastthird","Sunrise","Sunset"]);
@@ -131,7 +131,23 @@ class PrayerTimetable {
             echo "</tr>";
         }
         echo "</table>";
+    }
 
+    public function dynamicTimetable()
+    {
+        echo "<table border='1', class='table table-striped'>";
+        echo "<thead>";
+        echo "<tr><th scope='col'>Date</th><th scope='col'>prayer</th>";
+        $first_day = reset($this->data->data);
+        $prayer_titles = array_keys((array) $first_day->timings);
+        $prayer_titles = array_filter($prayer_titles, function($title)
+        {
+            return !in_array($title, ["Firstthird","Midnight","Lastthird","Sunrise","Sunset"]);
+        });
+        echo "</tr></thead>";
+        foreach($prayer_titles as $title){
+            echo "<tr scope='col'>$title</tr>";
+        }
     }
 
 
