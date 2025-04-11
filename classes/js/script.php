@@ -179,6 +179,16 @@ class PrayerTimetable {
                 
             }
         }
+        echo '</tbody>
+        </table>
+        </div>
+        <small class="text-muted">Times are based on local calculations.</small>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>';
         //$prayer_titles = array_unique((array) $get_data->timings);
         #$prayer_titles = array_filter($prayer_titles, function($title)
         #{
