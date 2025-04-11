@@ -33,8 +33,13 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
+  <?php 
+  include_once("js/script.php");
+  $t = new PrayerTimeTable();
+  $ttbl = $t->dynamicTimetable();
+?>
 
-  <!-- Overlapping Timetable Box -->
+  <!-- Overlapping Timetable Box
   <div class="timetable-overlap">
     <div class="container">
       <div class="row justify-content-center">
@@ -85,15 +90,17 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- Main Content -->
 
 <!-- New Bigger Div -->
-<div class="container my-6 big-div">
+<!-- <div class="container my-6 big-div">
   <h1>Welcome to our Mosque</h1>
   <p>Our community center and place of worship offers services and community programs. Join us for prayers, events, and more.</p>
-</div>
+</div> -->
 
 
-<?php include 'includes/footer.php'; ?>
+
+
+<?php //include 'includes/footer.php'; ?> 
