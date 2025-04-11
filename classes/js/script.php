@@ -170,9 +170,11 @@ class PrayerTimetable {
                 echo $date;
                 foreach($prayer_titles as $title)
                 {
-                    echo $title;
+                    echo '<tr>';
+                    echo '<td>'.$title.'</td>';
                     $time = str_replace( " (UTC)", "",$base->timings->$title);
-                    echo $time;
+                    echo '<td>'.$time.'</td>';
+                    echo '</tr>';
                 }
                 
             }
