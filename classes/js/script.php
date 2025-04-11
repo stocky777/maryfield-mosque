@@ -95,6 +95,7 @@ class PrayerTimetable {
     public function generateTimetableMonth()
     {
         //$todaydate = date("d-m-Y");
+        echo "<div class='table-responsive'>";
         echo "<table border='1', class='table table-striped'>";
         echo "<thead>";
         echo "<tr><th scope='col'>Date</th><th scope='col'>Weekday</th>";
@@ -132,6 +133,7 @@ class PrayerTimetable {
             echo "</tr>";
         }
         echo "</table>";
+        echo "</div>";
     }
 
     #data can be fed here so it can take the 
