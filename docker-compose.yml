@@ -3,9 +3,10 @@ services:
   www:
     image: php:apache
     environment: #changed to the correct file
-      - APACHE_DOCUMENT_ROOT=/var/www/html/index.php
+      - APACHE_DOCUMENT_ROOT=/var/www/html
     volumes:
       - "./:/var/www/html" # sync project with dir with container web dir
+      - "./000-default.conf:/etc/apache2/sites-available/000-default.conf"
     ports:
       - 80:80
       - 443:443 # for future ssl traffic
