@@ -4,7 +4,8 @@
   <p>Stay updated with the latest news and community announcements.</p>
   <!-- Example News Items -->
   <div class="list-group">
-    <?php include 'database.php'; ?>
+    <?php include 'includes/display-news.php';
+    ?>
   </div>
 </div>
 <?php 
