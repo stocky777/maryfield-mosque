@@ -1,7 +1,7 @@
 <?php
 require_once "database.php";
 //if there is a session this will have all the details required
-session_start();
+session_unset();
 //login class will have all the required functions for making the login work
 class login
 {
@@ -11,10 +11,12 @@ class login
     private $user = " ";
     //storing the password
     private $password = " ";
+    //storing sessions
+    //private $sessionName = " ";
+    //private $sessionToken = " ";
     //constructor will automatically get and set the data
     //will attempt login
     //check->login to have a clear picture of the login logic (read comments)
-    //
     public function __construct($user, $password)
     {
         $db = new db();
@@ -44,20 +46,17 @@ class login
         }
     }
 
-    public function rememberme()
-    {
-        $authentication = $this->login();
-        if( $authentication === True){
-            session_start();
-            $_SESSION["user"] = $this->user;
-            $_SESSION["token"] = bin2hex(random_bytes(32));
-        }
-    }
-
-    
-
-
-
+    // public function rememberme()
+    // {
+    //     $authentication = $this->login();
+    //     if( $authentication === True){
+    //         session_start();
+    //         $_SESSION["user"] = $this->user;
+    //         $_SESSION["token"] = bin2hex(random_bytes(32));
+    //         $this->sessionName = $_SESSION["user"];
+    //         $this->sessionToken = $_SESSION["token"];
+    //     }
+    // }
 
 }
 
