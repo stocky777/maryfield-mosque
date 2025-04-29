@@ -1,5 +1,8 @@
 <?php
-//session_start();
+require_once "classes/session.php";
+require_once "classes/toast.php";
+$session = new sessionHelper();
+$toast = new toast();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,9 +10,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="js/toast.js"></script>
 </head>
 <body>
-<?php include 'includes/header.php'; ?>
+<?php 
+
+include 'includes/header.php'; 
+
+if(!$session->isloggedin()){
+?>
     <div class="card mx-auto" style="width: 70%;">
         <div class="card-body">
         <form method="POST" action="includes/user-login.php">
@@ -26,10 +35,21 @@
             <input type="checkbox" name="remember" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" id="toastTrig" class="btn btn-primary">Submit</button>
         </form>
         </div>
     </div>
-<?php include 'includes/footer.php'; ?> 
+<?php 
+} else 
+{
+    print_r($_SESSION);
+    ?><a href="includes/logout.php">Logout</a><?
+}
+$toast->createToast();
+?>
+
+<?php 
+
+include 'includes/footer.php'; ?> 
 </body>
 </html>

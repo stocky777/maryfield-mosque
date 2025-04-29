@@ -22,7 +22,7 @@
             $this->session_name = $_SESSION['username'];
             $_SESSION["token"] = bin2hex(random_bytes(32));
             $this->session_token = $_SESSION["token"];
-            print_r($_SESSION);
+            //print_r($_SESSION);
         }
 
         //checks if in the page, the user has logged in and active and returns true or false
